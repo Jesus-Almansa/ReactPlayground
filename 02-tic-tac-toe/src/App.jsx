@@ -66,7 +66,7 @@ function App() {
   return (
     <main className='board'>
       <h1>Tic tac toe</h1>
-      {/* {winner && <p className="winner">Winner: {winner}</p>} */}
+      {winner && <p className="winner">Winner: {winner}</p>}
       <section className='game'>
         {
           board.map((_, index) => {
