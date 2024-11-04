@@ -25,7 +25,7 @@ const Square = ({ children, isSelected, updateBoard, index }) => {
   }
   return (
     <div onClick={handleClick} className={className} >
-        {children}
+      {children}
     </div>
   )
 }
@@ -36,21 +36,18 @@ function App() {
   const [turn, setTurn] = useState(TURNS.X);
   const [winner, setWinner] = useState(null); // state to store the winner
 
-  // console.log(board);
-  // console.log(turn);
-
   const checkWinner = (boardToCheck) => {
     // check if there is a winner
     for (const combo of WINNER_COMBOS) {
       const [a, b, c] = combo;
-      if (boardToCheck[a] && boardToCheck[a] === boardToCheck[b] && boardToCheck[a] === boardToCheck[c]) // if the 3 squares are the same
-        {
+      if (boardToCheck[a] && boardToCheck[a] === boardToCheck[b] && boardToCheck[a] === boardToCheck[c]) {
         return boardToCheck[a]; // return the winner
       }
     }
+    return null; // return null if no winner
+  }
 
   const updateBoard = (index) => {
-
     if (board[index] || winner) return // if the square is already filled, return
 
     const newBoard = [...board];  // copy the board
@@ -69,6 +66,7 @@ function App() {
   return (
     <main className='board'>
       <h1>Tic tac toe</h1>
+      {/* {winner && <p className="winner">Winner: {winner}</p>} */}
       <section className='game'>
         {
           board.map((_, index) => {
