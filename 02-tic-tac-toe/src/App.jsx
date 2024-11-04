@@ -39,15 +39,31 @@ function App() {
   // console.log(board);
   // console.log(turn);
 
+  const checkWinner = (boardToCheck) => {
+    // check if there is a winner
+    for (const combo of WINNER_COMBOS) {
+      const [a, b, c] = combo;
+      if (boardToCheck[a] && boardToCheck[a] === boardToCheck[b] && boardToCheck[a] === boardToCheck[c]) // if the 3 squares are the same
+        {
+        return boardToCheck[a]; // return the winner
+      }
+    }
+
   const updateBoard = (index) => {
 
-    if (board[index]) return // if the square is already filled, return
+    if (board[index] || winner) return // if the square is already filled, return
 
     const newBoard = [...board];  // copy the board
     newBoard[index] = turn;      // fill the square with the current turn
     setBoard(newBoard);         // update the board
 
     setTurn(turn === TURNS.X ? TURNS.O : TURNS.X); // change the turn
+
+    // check if there is a winner
+    const newWinner = checkWinner(newBoard);
+    if (newWinner) {
+      setWinner(newWinner);
+    }
   }
 
   return (
